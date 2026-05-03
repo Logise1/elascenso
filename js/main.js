@@ -79,7 +79,7 @@ function startGame(savedData) {
             flags: {},
             currentChapter: '',
             theme: '',
-            safeCode: Math.floor(Math.random() * 90 + 10).toString() // Genera de "10" a "99"
+            safeCode: (Math.floor(Math.random() * 31) + 1).toString().padStart(2, '0') // Genera de "01" a "31"
         };
         applyTheme('');
         printText("INICIANDO PROTOCOLO DE SIMULACIÓN...", "system", () => {
@@ -100,18 +100,22 @@ function loadNode(nodeId, isReloading = false) {
     
     // Asegurar que exista un safeCode en partidas viejas
     if (!gameState.safeCode) {
-        gameState.safeCode = Math.floor(Math.random() * 90 + 10).toString();
+        gameState.safeCode = (Math.floor(Math.random() * 31) + 1).toString().padStart(2, '0');
     }
 
     gameState.currentNode = nodeId;
     let uiUpdated = false;
 
-    // Procesar Cambio de Capítulo y Tema
-    if (node.chapter && node.chapter !== gameState.currentChapter) {
-        gameState.currentChapter = node.chapter;
+    // Procesar Cambio de Capítulo, Tema y Música (incluso al recargar partida)
+    let chapterChanged = (node.chapter && node.chapter !== gameState.currentChapter);
+    
+    if (chapterChanged || isReloading) {
+        if (node.chapter) {
+            gameState.currentChapter = node.chapter;
+        }
         chapterDisplay.textContent = `Capítulo: ${gameState.currentChapter}`;
         
-        if (!isReloading) {
+        if (chapterChanged && !isReloading) {
             const stageDiv = document.createElement('div');
             stageDiv.className = 'log-entry stage-change';
             stageDiv.textContent = `--- ${gameState.currentChapter.toUpperCase()} ---`;
@@ -120,15 +124,19 @@ function loadNode(nodeId, isReloading = false) {
         
         // Determinar pista BGM por el nombre del capítulo (orden inverso para evitar fallos con números romanos)
         let trackNum = 0;
-        if (gameState.currentChapter.includes("Capítulo V") || gameState.currentChapter.includes("Epílogo") || gameState.currentChapter.includes("Epilogo") || gameState.currentChapter.includes("Horizonte")) trackNum = 5;
-        else if (gameState.currentChapter.includes("Capítulo IV")) trackNum = 4;
-        else if (gameState.currentChapter.includes("Capítulo III")) trackNum = 3;
-        else if (gameState.currentChapter.includes("Capítulo II")) trackNum = 2;
-        else if (gameState.currentChapter.includes("Capítulo I")) trackNum = 1;
+        let capUpper = gameState.currentChapter.toUpperCase();
+        
+        if (capUpper.includes("CAPÍTULO V") || capUpper.includes("EPÍLOGO") || capUpper.includes("EPILOGO") || capUpper.includes("HORIZONTE")) trackNum = 5;
+        else if (capUpper.includes("CAPÍTULO IV")) trackNum = 4;
+        else if (capUpper.includes("CAPÍTULO III")) trackNum = 3;
+        else if (capUpper.includes("CAPÍTULO II")) trackNum = 2;
+        else if (capUpper.includes("CAPÍTULO I")) trackNum = 1;
         
         playBGM(trackNum);
         
-        uiUpdated = true;
+        if (chapterChanged) {
+            uiUpdated = true;
+        }
     }
 
     if (node.theme !== undefined) {

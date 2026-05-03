@@ -164,7 +164,7 @@ const storyNodes = {
         choices: [{ text: "Tomarlo", action: "coger_reloj", next: "ch1_dormitorio" }]
     },
     ch1_caja_fuerte: {
-        text: "MINIJUEGO: La caja fuerte digital pide un código de 2 dígitos. ¿Cuál era el día importante marcado en el calendario? (Escribe el número y dale a Enviar)",
+        text: "Te arrodillas frente al armario. La caja fuerte digital pide un código de 2 dígitos. ¿Cuál era el día importante marcado en el calendario? (Escribe el número y dale a Enviar)",
         inputType: "text",
         expectedInputVar: "safeCode",
         inputSuccessNext: "ch1_caja_win",
@@ -212,7 +212,7 @@ const storyNodes = {
     
     // Minijuego Laberinto de Niebla
     ch2_niebla_1: {
-        text: "MINIJUEGO - LABERINTO DE NIEBLA: La niebla es espesa. Tienes que salir del bosque. Escuchas el crujir de ramas secas a tu izquierda y un sordo sonido de agua a tu derecha.",
+        text: "La niebla es tan espesa que apenas ves tus propios pies. Tienes que salir del bosque. Escuchas el crujir de ramas secas a tu izquierda y un sordo sonido de agua a tu derecha.",
         choices: [
             { text: "Ir hacia el crujido (Izquierda)", action: "ir_izq", next: "ch2_niebla_fail" },
             { text: "Ir hacia el agua (Derecha)", action: "ir_der", next: "ch2_niebla_2" },
@@ -350,7 +350,7 @@ const storyNodes = {
     
     // Minijuego Batalla Mental / Ataque de Ansiedad
     ch4_ataque_1: {
-        text: "MINIJUEGO - ATAQUE DE ANSIEDAD: La Sombra susurra: 'Fue tu culpa. Podrías haber hecho más.' Tu pecho se oprime, apenas puedes respirar.",
+        text: "El frío te paraliza. La Sombra susurra desde la oscuridad: 'Fue tu culpa. Podrías haber hecho más.' Tu pecho se oprime violentamente, apenas puedes respirar.",
         choices: [
             { text: "¡Callate! ¡Eres un mentiroso!", action: "atacar", next: "ch4_ataque_fail" },
             { text: "(Inhalar profundamente) No pude controlarlo.", action: "inhalar", next: "ch4_ataque_2" },
@@ -436,7 +436,7 @@ const storyNodes = {
         choices: [{ text: "Continuar ascendiendo paso a paso", action: "subir", next: "ch5_resbalo" }]
     },
     ch5_resbalo: {
-        text: "MINIJUEGO DE REACCIÓN LENTA: Tus botas resbalan en un escalón húmedo. La piedra pesada se tambalea y tira de ti hacia atrás.",
+        text: "¡Tus botas resbalan en un escalón húmedo! La piedra pesada se tambalea peligrosamente y tira de ti hacia atrás, hacia el abismo negro.",
         choices: [
             { text: "Soltar la piedra y salvarte", action: "soltar", next: "ch5_caida" },
             { text: "Aferrarse a la piedra abrazando el dolor", action: "agarrar", next: "ch5_subiendo_2" },
@@ -481,7 +481,7 @@ const storyNodes = {
         ]
     },
     credits: {
-        text: "Gracias por jugar a 'El Ascenso'.\n\nDesarrollado para quienes han perdido algo o a alguien.\nEl duelo es como llevar una piedra pesada en el bolsillo: al principio pesa tanto que no puedes caminar, con el tiempo te acostumbras a su peso, y aunque nunca desaparece, tus piernas se vuelven lo suficientemente fuertes para subir montañas.\n\n(Puedes volver al menú principal para iniciar un nuevo viaje).",
+        text: "Gracias por jugar a 'El Ascenso'.\n\nCreado por Ariel Capdevila.\nMúsica generada con Suno.\n\nDesarrollado para quienes han perdido algo o a alguien.\nEl duelo es como llevar una piedra pesada en el bolsillo: al principio pesa tanto que no puedes caminar, con el tiempo te acostumbras a su peso, y aunque nunca desaparece, tus piernas se vuelven lo suficientemente fuertes para subir montañas.\n\n(Puedes volver al menú principal para iniciar un nuevo viaje).",
         choices: []
     }
 };
