@@ -113,7 +113,7 @@ function loadNode(nodeId, isReloading = false) {
         
         // Determinar pista BGM por el nombre del capítulo (orden inverso para evitar fallos con números romanos)
         let trackNum = 0;
-        if (gameState.currentChapter.includes("Capítulo V") || gameState.currentChapter.includes("Epílogo")) trackNum = 5;
+        if (gameState.currentChapter.includes("Capítulo V") || gameState.currentChapter.includes("Epílogo") || gameState.currentChapter.includes("Epilogo") || gameState.currentChapter.includes("Horizonte")) trackNum = 5;
         else if (gameState.currentChapter.includes("Capítulo IV")) trackNum = 4;
         else if (gameState.currentChapter.includes("Capítulo III")) trackNum = 3;
         else if (gameState.currentChapter.includes("Capítulo II")) trackNum = 2;
