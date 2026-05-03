@@ -13,7 +13,7 @@ const storyNodes = {
             { text: "Revisar la puerta principal", action: "revisar_puerta", next: "ch1_puerta" }
         ]
     },
-    
+
     // --- Pasillo ---
     ch1_pasillo: {
         text: "Estás de vuelta en el pasillo oscuro. El zumbido del silencio continúa.",
@@ -209,7 +209,7 @@ const storyNodes = {
         item: "Mano Ensangrentada",
         choices: [{ text: "Caminar por el bosque", action: "caminar", next: "ch2_niebla_1" }]
     },
-    
+
     // Minijuego Laberinto de Niebla
     ch2_niebla_1: {
         text: "La niebla es tan espesa que apenas ves tus propios pies. Tienes que salir del bosque. Escuchas el crujir de ramas secas a tu izquierda y un sordo sonido de agua a tu derecha.",
@@ -238,7 +238,7 @@ const storyNodes = {
             { text: "Ir hacia la luz roja (Derecha)", action: "ir_der", next: "ch2_coche" }
         ]
     },
-    
+
     ch2_coche: {
         text: "¡Lograste salir del laberinto! La luz roja pertenece a un coche abandonado y oxidado en el barro.",
         achievement: { id: "laberinto", title: "Navegante de la Bruma", desc: "Superaste el laberinto de niebla." },
@@ -347,7 +347,7 @@ const storyNodes = {
             { text: "Escuchar a la Sombra", action: "escuchar", next: "ch4_ataque_1" }
         ]
     },
-    
+
     // Minijuego Batalla Mental / Ataque de Ansiedad
     ch4_ataque_1: {
         text: "El frío te paraliza. La Sombra susurra desde la oscuridad: 'Fue tu culpa. Podrías haber hecho más.' Tu pecho se oprime violentamente, apenas puedes respirar.",
