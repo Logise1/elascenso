@@ -4,7 +4,8 @@ let gameState = {
     inventory: [],
     flags: {}, // Added flags support here
     currentChapter: '',
-    theme: ''
+    theme: '',
+    safeCode: '' // Randomized per savefile
 };
 
 let currentSlot = 1; // Slot activo
@@ -77,7 +78,8 @@ function startGame(savedData) {
             inventory: [],
             flags: {},
             currentChapter: '',
-            theme: ''
+            theme: '',
+            safeCode: Math.floor(Math.random() * 90 + 10).toString() // Genera de "10" a "99"
         };
         applyTheme('');
         printText("INICIANDO PROTOCOLO DE SIMULACIÓN...", "system", () => {
@@ -96,6 +98,11 @@ function loadNode(nodeId, isReloading = false) {
         return;
     }
     
+    // Asegurar que exista un safeCode en partidas viejas
+    if (!gameState.safeCode) {
+        gameState.safeCode = Math.floor(Math.random() * 90 + 10).toString();
+    }
+
     gameState.currentNode = nodeId;
     let uiUpdated = false;
 
@@ -179,10 +186,15 @@ function loadNode(nodeId, isReloading = false) {
     }
     
     function printMainText() {
-        printText(node.text, "narrative", () => {
+        let nodeText = node.text;
+        if (nodeText.includes('{{safeCode}}')) {
+            nodeText = nodeText.replace('{{safeCode}}', gameState.safeCode);
+        }
+
+        printText(nodeText, "narrative", () => {
             renderButtons(node.choices, (nextNodeId) => {
                 loadNode(nextNodeId);
-            });
+            }, node);
         });
     }
 }

@@ -8,6 +8,9 @@ const buttonContainer = document.getElementById('button-container');
 const inventoryList = document.getElementById('inventory-list');
 const chapterDisplay = document.getElementById('current-chapter');
 const typingCommand = document.getElementById('typing-command');
+const inputContainer = document.getElementById('input-container');
+const nodeInput = document.getElementById('node-input');
+const nodeSubmit = document.getElementById('node-submit');
 
 // Logros DOM
 const achContainer = document.getElementById('achievement-container');
@@ -271,9 +274,43 @@ function simulateCommandTyping(command, callback) {
     typeChar();
 }
 
-// Renderizar botones para las elecciones del jugador
-function renderButtons(choices, onChoiceCallback) {
+// Renderizar botones para las elecciones del jugador y campo de texto si es necesario
+function renderButtons(choices, onChoiceCallback, node) {
     buttonContainer.innerHTML = '';
+    if (inputContainer) {
+        inputContainer.style.display = 'none';
+        nodeSubmit.disabled = false;
+        nodeInput.disabled = false;
+        nodeSubmit.onclick = null;
+    }
+
+    if (node && node.inputType === 'text') {
+        inputContainer.style.display = 'flex';
+        nodeInput.value = '';
+        nodeInput.focus();
+        
+        nodeSubmit.onclick = () => {
+            if (isTyping) return;
+            const val = nodeInput.value.trim();
+            if (val === '') return;
+            
+            disableButtons();
+            
+            simulateCommandTyping(val, () => {
+                inputContainer.style.display = 'none';
+                
+                // Evaluar la respuesta contra la variable del gameState
+                let targetVar = node.expectedInputVar ? gameState[node.expectedInputVar] : null;
+                
+                if (val === targetVar) {
+                    onChoiceCallback(node.inputSuccessNext);
+                } else {
+                    onChoiceCallback(node.inputFailNext);
+                }
+            });
+        };
+    }
+
     if (!choices || choices.length === 0) return;
     
     // Inicializar flags si no existen
@@ -314,6 +351,8 @@ function renderButtons(choices, onChoiceCallback) {
 function disableButtons() {
     const buttons = buttonContainer.querySelectorAll('button');
     buttons.forEach(btn => btn.disabled = true);
+    if (nodeSubmit) nodeSubmit.disabled = true;
+    if (nodeInput) nodeInput.disabled = true;
 }
 
 // Aplicar temas globales según la fase

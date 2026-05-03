@@ -325,6 +325,22 @@ h2 {
     box-shadow: inset 0 0 5px rgba(136, 204, 255, 0.05);
 }
 
+.sys-input {
+    flex-grow: 1;
+    background: #000;
+    border: 1px solid #333;
+    color: #0f0;
+    font-family: 'Fira Code', monospace;
+    padding: 10px;
+    font-size: 0.9em;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.sys-input:focus {
+    border-color: #0f0;
+    box-shadow: 0 0 5px rgba(0, 255, 0, 0.3);
+}
+
 .empty-inv {
     color: #444 !important;
     font-style: italic;
@@ -453,6 +469,16 @@ h2 {
 .transcendence .log-entry.stage-change {
     color: #3b82f6;
     text-shadow: none;
+}
+
+.transcendence .sys-input {
+    background: #fff;
+    border-color: #cbd5e1;
+    color: #333;
+}
+.transcendence .sys-input:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 5px rgba(59, 130, 246, 0.3);
 }
 
 .transcendence #inventory-list li {

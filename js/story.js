@@ -127,7 +127,7 @@ const storyNodes = {
         choices: [{ text: "Cerrar", action: "cerrar", next: "ch1_cocina" }]
     },
     ch1_calendario: {
-        text: "El calendario marca un mes pasado. Hay una fecha rodeada con un círculo rojo: el día 14. Te lo anotas mentalmente.",
+        text: "El calendario marca un mes pasado. Hay una fecha rodeada con un círculo rojo: el día {{safeCode}}. Te lo anotas mentalmente.",
         setFlag: "conoce_fecha",
         choices: [{ text: "Apartar la vista", action: "ignorar", next: "ch1_cocina" }]
     },
@@ -164,12 +164,12 @@ const storyNodes = {
         choices: [{ text: "Tomarlo", action: "coger_reloj", next: "ch1_dormitorio" }]
     },
     ch1_caja_fuerte: {
-        text: "MINIJUEGO: La caja fuerte digital pide un código de 2 dígitos. ¿Cuál era el día importante marcado en el calendario?",
+        text: "MINIJUEGO: La caja fuerte digital pide un código de 2 dígitos. ¿Cuál era el día importante marcado en el calendario? (Escribe el número y dale a Enviar)",
+        inputType: "text",
+        expectedInputVar: "safeCode",
+        inputSuccessNext: "ch1_caja_win",
+        inputFailNext: "ch1_caja_fail",
         choices: [
-            { text: "Introducir '03'", action: "pin_03", next: "ch1_caja_fail" },
-            { text: "Introducir '14'", action: "pin_14", reqFlag: "conoce_fecha", next: "ch1_caja_win" },
-            { text: "Introducir '14'", action: "pin_14_suerte", notReqFlag: "conoce_fecha", next: "ch1_caja_win" },
-            { text: "Introducir '28'", action: "pin_28", next: "ch1_caja_fail" },
             { text: "Dejarla", action: "dejar", next: "ch1_dormitorio" }
         ]
     },
